@@ -1,0 +1,89 @@
+// prisma/schema.prisma
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    email     String   @unique
+    password  String
+    nickname  String
+    bio       String?
+    createdAt DateTime @default(now())
+
+    questions      Question[]
+    answers        Answer[]
+    chatMessages   ChatMessage[]
+    posts          Post[]
+    aiChatMessages AiChatMessage[]
+    aiChatSummary  AiChatSummary?
+}
+
+model Question {
+    id          Int      @id @default(autoincrement())
+    title       String
+    content     String
+    category    String // ENUM으로 바꿔도 되지만 코드가 문자열 기반이라 String 유지
+    isCompleted Boolean  @default(false)
+    createdAt   DateTime @default(now())
+
+    authorId Int
+    author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+    answers Answer[]
+}
+
+model Answer {
+    id         Int      @id @default(autoincrement())
+    content    String
+    isSelected Boolean  @default(false)
+    createdAt  DateTime @default(now())
+
+    questionId Int
+    question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+    authorId Int
+    author   User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+model ChatMessage {
+    id        Int      @id @default(autoincrement())
+    user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+    userId    Int?
+    content   String
+    createdAt DateTime @default(now())
+}
+
+model Post {
+    id        Int      @id @default(autoincrement())
+    title     String
+    content   String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    author User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId Int
+}
+
+model AiChatMessage {
+    id         Int      @id @default(autoincrement())
+    user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId     Int
+    role       String // "user" | "assistant" | "summary"
+    content    String
+    responseId String?
+    createdAt  DateTime @default(now())
+}
+
+model AiChatSummary {
+    id        Int      @id @default(autoincrement())
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    Int      @unique
+    content   String
+    updatedAt DateTime @updatedAt
+}

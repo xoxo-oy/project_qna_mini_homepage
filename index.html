@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MiniHome Q&A</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              hand: ['Patrick Hand', 'cursive'],
+            },
+            colors: {
+              'postit-yellow': '#fef3c7',
+              'postit-blue': '#bae6fd',
+              'postit-green': '#bbf7d0',
+              'postit-pink': '#fbcfe8',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body { background-color: #f3f4f6; }
+      .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "zustand": "https://aistudiocdn.com/zustand@^5.0.9",
+    "axios": "https://aistudiocdn.com/axios@^1.13.2",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
+    "express": "https://aistudiocdn.com/express@^5.2.1",
+    "cors": "https://aistudiocdn.com/cors@^2.8.5",
+    "cookie-parser": "https://aistudiocdn.com/cookie-parser@^1.4.7",
+    "helmet": "https://aistudiocdn.com/helmet@^8.1.0",
+    "dotenv": "https://aistudiocdn.com/dotenv@^17.2.3",
+    "@prisma/client": "https://aistudiocdn.com/@prisma/client@^7.1.0",
+    "jsonwebtoken": "https://aistudiocdn.com/jsonwebtoken@^9.0.3",
+    "bcryptjs": "https://aistudiocdn.com/bcryptjs@^3.0.3",
+    "zod": "https://aistudiocdn.com/zod@^4.1.13"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+{
+  "name": "MiniHome Q&A",
+  "description": "A Cyworld-inspired Q&A platform with sticky-note dashboard. Includes full Backend (Node/Express/Prisma) and Frontend (React/Vite) code structure."
+}
