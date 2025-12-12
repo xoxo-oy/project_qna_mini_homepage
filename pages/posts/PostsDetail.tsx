@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import ChatWidget from "@/components/ChatWidget";
+import AiChatWidget from "@/components/AiChatWidget";
 
 interface Post {
   id: number;
@@ -104,6 +105,7 @@ const PostsDetail: React.FC = () => {
         </div>
       )}
       <ChatWidget />
+      <AiChatWidget />
     </div>
   );
 };

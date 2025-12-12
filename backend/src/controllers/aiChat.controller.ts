@@ -13,7 +13,7 @@ export const getAiChatMessages = async (req: Request, res: Response) => {
       orderBy: { createdAt: "desc" },
       take: 10,
     });
-    res.json(messages);
+    res.json(messages.reverse());
   } catch (err) {
     res.status(500).json({ message: "Failed to load messages" });
   }
