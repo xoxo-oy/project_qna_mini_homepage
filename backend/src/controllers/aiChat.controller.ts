@@ -46,7 +46,7 @@ export const postAiChatMessage = async (
     try {
       let response = await openai.responses.create({
         model: "gpt-5-mini",
-        input: `${content} : 20줄 이내 핵심 요약`,
+        input: `'질문이 대화 같으면 자연스럽게 대화 해주고, 질문 같으면 20줄 내로 핵심 요약 답변 줘' 질문:${content} `,
         previous_response_id: lastAssistant?.responseId || undefined,
         max_output_tokens: 2000,
       });

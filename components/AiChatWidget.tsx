@@ -23,7 +23,11 @@ export default function AiChatWidget() {
   useEffect(() => {
     if (!user) return;
 
-    fetchMessages();
+    fetchMessages().then(() => {
+      if (containerRef.current) {
+        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+      }
+    });
 
     const socket = io("http://220.93.220.93:3001", { withCredentials: true });
     socket.emit("joinAiRoom", user.id);
@@ -85,7 +89,6 @@ export default function AiChatWidget() {
       const newOpen = !p;
       localStorage.setItem("aiChatOpen", String(newOpen));
 
-      // 열었을 때 스크롤 최하단
       if (newOpen && containerRef.current) {
         setTimeout(() => {
           containerRef.current!.scrollTop = containerRef.current!.scrollHeight;
@@ -148,6 +151,32 @@ export default function AiChatWidget() {
             overflow: "hidden",
           }}
         >
+          {/* 새로고침 버튼 */}
+          <div style={{ padding: 6, textAlign: "right" }}>
+            <button
+              onClick={() => {
+                fetchMessages().then(() => {
+                  if (containerRef.current) {
+                    setTimeout(() => {
+                      containerRef.current!.scrollTop =
+                        containerRef.current!.scrollHeight;
+                    }, 0);
+                  }
+                });
+              }}
+              style={{
+                padding: "4px 8px",
+                fontSize: 12,
+                borderRadius: 6,
+                border: "1px solid #ccc",
+                background: "#F3F4F6",
+                cursor: "pointer",
+              }}
+            >
+              새로고침
+            </button>
+          </div>
+
           <div
             ref={containerRef}
             style={{ flex: 1, padding: 12, overflowY: "auto", fontSize: 14 }}

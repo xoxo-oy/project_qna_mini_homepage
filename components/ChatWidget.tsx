@@ -23,7 +23,10 @@ export default function ChatWidget() {
     const loadLatest = async () => {
       await fetchMessages();
       if (containerRef.current) {
-        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        // 렌더링 후 스크롤
+        requestAnimationFrame(() => {
+          containerRef.current!.scrollTop = containerRef.current!.scrollHeight;
+        });
       }
     };
     loadLatest();
@@ -36,7 +39,9 @@ export default function ChatWidget() {
       audio.currentTime = 0;
       audio.play().catch(() => {});
       if (containerRef.current) {
-        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        requestAnimationFrame(() => {
+          containerRef.current!.scrollTop = containerRef.current!.scrollHeight;
+        });
       }
     };
     socket.on("chat:new", handleNewMessage);
